@@ -1,5 +1,6 @@
 import React from 'react'
 import { GridItemList } from './GridItemList'
+import { ItemCount } from './ItemCount'
 import { NavBar } from './NavBar'
 
 export const App = () => {
@@ -7,6 +8,7 @@ export const App = () => {
     <>
     <NavBar />
     <GridItemList ofertas='Ofertas!!!!' />
+    <ItemCount />
     </>
   )
 
