@@ -5,4 +5,18 @@
     margin-bottom: 10px;
     margin-right: 10px;
     overflow: hidden;
+    display: flex;
+
+  }
+
+  .card-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  pre {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
   }
