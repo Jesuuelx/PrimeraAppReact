@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import "../index.css";
 
-export const ItemCount = () => {
-  const [counter, setCounter] = useState(0);
-  const [compra, setCompra] = useState("hay 0 Elementos en el carrito");
-  const [counterCompra, setCounterCompra] = useState({
-    nroArticulos: 0,
-    carrito: 0,
-  });
+export const ItemCount = ({setCompra, initialState, stock }) => {
+  const [counter, setCounter] = useState(initialState);
+  
+  
 
-  let stock = 10;
   const handleSumar = () => {
     if (counter === 10) {
       return;
@@ -52,8 +48,6 @@ export const ItemCount = () => {
         >
           Finalizar Compra
         </button>
-
-        <h2> {compra} </h2>
       </div>
     </div>
   );
