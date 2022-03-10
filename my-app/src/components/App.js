@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { productos } from '../data-productos/data'
 import { GridItemList } from './GridItemList'
 import { ItemCount } from './ItemCount'
 import { NavBar } from './NavBar'
@@ -15,10 +16,12 @@ export const App = () => {
     
   }
 
+
   return (
     <>
     <NavBar />
-    <GridItemList ofertas='Ofertas!!!!' />
+    <GridItemList itemList={ productos } />
+    <h3>Oferta, al Detalle</h3>
     <ItemCount {...properties} />
     <h2>{ compra }</h2>
     </>
