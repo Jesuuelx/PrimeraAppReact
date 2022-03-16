@@ -44,21 +44,6 @@ export const GridItemList = ({ itemList }) => {
           <GridItem {...item} key={item.id} />
         ))}
       </ul>
-      <hr />
-          <ul className="card-grid">
-          {   data.map(item => (
-      show && <ItemDetail itemList={ itemList } {...item} key={item.id}   />
-      ))}
-      </ul>
-      <button
-        className="btn btn-outline-primary"
-        onClick={() => {
-          setShow(!show);
-        }}
-      >
-        
-        Mostrar Detalle/No mostrar
-      </button>
     </>
   );
 };

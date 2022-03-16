@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-export const ItemDetail = ({ itemList, img, nombre, description  }) => {
+export const ItemDetail = ({ producto }) => {
 
   const [cargando, setCargando] = useState({
     loading:true,
@@ -12,9 +12,9 @@ export const ItemDetail = ({ itemList, img, nombre, description  }) => {
 const  getItem = () => {
 
   return new Promise ((resolve, reject ) => {
-      if( itemList.length > 1 ){
+      if( producto ){
         setTimeout(() => {
-          resolve(itemList)
+          resolve(producto)
         }, 3000);
       }else
       reject('Acceso Negado')
@@ -40,9 +40,10 @@ useEffect(() => {
 {loading && <p className="animate__animated animate__flash">Loading</p>}
 
 <div className="card animate__animated animate__fadeIn">
-            <img src={ img } alt={ nombre } width={350} height={350} />
-            <h4> { nombre } </h4>
-            <p>{ description }</p>
+            <img src={ data.img } alt={ data.nombre } width={200} height={200} />
+            <h4> { data.nombre } </h4>
+            <p>{ data.description }</p>
+            <h4>PRecio 1000$</h4>
         </div>
 
 
