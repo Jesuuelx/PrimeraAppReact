@@ -1,33 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { productos as itemList } from "../data-productos/data";
+import { productos } from "../data-productos/data";
 import { GridItem } from "./GridItem";
 
-export const GridItemList = ({  }) => {
+export const GridItemList = ({}) => {
   const [state, setState] = useState({
     data: [],
-    loading: true,
+    loading:true,
   });
 
   const { id } = useParams();
 
-
-
   const { data, loading } = state;
+
+  if (typeof id !== "undefined") {
+  }
 
   const getData = () => {
     return new Promise((resolve, reject) => {
-      if (itemList.length > 1) {
+      if (typeof id !== "undefined") {
+        let itemList = productos.filter(item => item.tipo == id);
         setTimeout(() => {
           resolve(itemList);
         }, 3000);
+      } else if (typeof id === "undefined") {
+        setTimeout(() => {
+          resolve(productos);
+        }, 3000);
       } else {
-        reject("Acceso denegado");
+        reject("Acceso negado");
       }
     });
   };
 
   useEffect(() => {
+    setState({
+      data: [],
+      loading:true,
+    });
+
     getData()
       .then((resp) => {
         setState({

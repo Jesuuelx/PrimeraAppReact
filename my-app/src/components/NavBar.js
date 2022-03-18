@@ -25,7 +25,7 @@ export const NavBar = () => {
             <Link className="nav-link active" aria-current="page" to="/">
               Home
             </Link>
-            <Link className="nav-link" to="/tipo/1">
+            <Link className="nav-link" to="/tipo/1" >
               Apple
             </Link>
             <Link className="nav-link" to="/tipo/2">
