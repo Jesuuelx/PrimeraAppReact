@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { productos as itemList } from "../data-productos/data";
 import { GridItem } from "./GridItem";
-import { ItemDetail } from "./ItemDetail";
 
-export const GridItemList = ({ itemList }) => {
+export const GridItemList = ({  }) => {
   const [state, setState] = useState({
     data: [],
     loading: true,
   });
 
-  const [show, setShow] = useState(false);
+  const { id } = useParams();
+
+
 
   const { data, loading } = state;
 
@@ -33,7 +36,7 @@ export const GridItemList = ({ itemList }) => {
         });
       })
       .catch(console.error);
-  });
+  }, [id]);
 
   return (
     <>

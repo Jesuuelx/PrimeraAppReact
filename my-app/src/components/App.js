@@ -1,32 +1,16 @@
-import React, { useState } from 'react'
-import { productos } from '../data-productos/data'
-import { GridItemList } from './GridItemList'
-import { ItemCount } from './ItemCount'
-import { ItemDetail } from './ItemDetail'
+import { Footer } from './Footer'
+import { Main } from './Main'
 import { NavBar } from './NavBar'
-
+import { BrowserRouter as Router } from 'react-router-dom';
 export const App = () => {
  
-  /* el set compra seria mi funcion OnAdd */
-  const [compra, setCompra] = useState('No Hay Articulos en el carrito');
-
-  const properties = {
-    setCompra:setCompra,
-    initialState:0,
-    stock:10,
-    
-  }
-
 
   return (
-    <>
+    <Router>
     <NavBar />
-    <GridItemList itemList={ productos } />
-    <h3>Oferta, al Detalle</h3>
-    <ItemDetail producto={ productos[1] } />
-    <ItemCount {...properties} />
-    <h2>{ compra }</h2>
-    </>
+    <Main />
+    <Footer />
+    </Router>
   )
 
 }

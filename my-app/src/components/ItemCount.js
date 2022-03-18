@@ -1,42 +1,34 @@
 import React, { useState } from "react";
 import "../index.css";
 
-export const ItemCount = ({setCompra, initialState, stock }) => {
+export const ItemCount = ({ initialState = 0, precio }) => {
   const [counter, setCounter] = useState(initialState);
-  
+  const [compra,  setCompra] = useState('No hay Arts en el carrito')
   
 
   const handleSumar = () => {
-    if (counter === 10) {
-      return;
-    }
 
     setCounter((c) => c + 1);
-    stock = stock - 1;
+    
   };
 
   const handleRestar = () => {
-    if (counter === 0) {
-      return;
-    }
-
+    
     setCounter((c) => c - 1);
-    stock = stock + 1;
-  };
+    };
 
   const handleFinal = () => {
-    if (counter === 0) {
-      return;
+    if ( counter === 0 ){
+      return
     }
+    
     setCompra(`Tienes ${counter} articulos en el carrito`);
   };
 
   return (
-    <div className="card-grid">
-      <div className="card">
-        <img src="/imgs/iphone13.png" alt="iphone13" width={200} height={200} />
-        <pre> {counter} </pre>
-        <button onClick={handleSumar} className="btn btn-primary btn-block">
+      <div>
+        <pre> {counter} x { precio } $ </pre>
+        <button onClick={handleSumar} className="btn btn-success btn-block">
           Sumar
         </button>
         <button onClick={handleRestar} className="btn btn-danger btn-block">
@@ -48,7 +40,7 @@ export const ItemCount = ({setCompra, initialState, stock }) => {
         >
           Finalizar Compra
         </button>
+        <pre>{ compra }</pre>
       </div>
-    </div>
   );
 };

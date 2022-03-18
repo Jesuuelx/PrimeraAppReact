@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
+import { productos } from '../data-productos/data';
+import { ItemCount } from './ItemCount';
+import { Loading } from './Loading';
 
-export const ItemDetail = ({ producto }) => {
+export const ItemDetail = ({ }) => {
 
   const [cargando, setCargando] = useState({
     loading:true,
@@ -8,13 +12,18 @@ export const ItemDetail = ({ producto }) => {
   })
 
   const { loading, data } = cargando;
+
+const { id } = useParams()
+
+
+  
  
 const  getItem = () => {
 
   return new Promise ((resolve, reject ) => {
-      if( producto ){
+      if( productos[id] ){
         setTimeout(() => {
-          resolve(producto)
+          resolve(productos[id])
         }, 3000);
       }else
       reject('Acceso Negado')
@@ -29,24 +38,27 @@ useEffect(() => {
       data:resp
 
     })
-  })
+  }).catch(console.error)
 
-})
+}, [id])
 
  
  
   return (
-    <div>
-{loading && <p className="animate__animated animate__flash">Loading</p>}
+    <>
+    
+{loading ? ( <p className="animate__animated animate__flash"> <Loading /> </p> )  : (
 
 <div className="card animate__animated animate__fadeIn">
-            <img src={ data.img } alt={ data.nombre } width={200} height={200} />
+            <img src={ data.img } alt={ data.nombre } width={400} height={250} />
             <h4> { data.nombre } </h4>
             <p>{ data.description }</p>
-            <h4>PRecio 1000$</h4>
-        </div>
+            <h4>Precio Unitario { data.price } $</h4>
+            <ItemCount precio={data.price} />
+        </div> )
 
 
-    </div>
+  }
+  </>
   )
 }

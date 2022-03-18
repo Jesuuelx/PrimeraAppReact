@@ -4,6 +4,7 @@
     border-radius: 6px;
     margin-bottom: 10px;
     margin-right: 10px;
+    padding: 5px;
     overflow: hidden;
     display: flex;
 
@@ -19,4 +20,24 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 16px;
     font-weight: bold;
+  }
+
+  .detalle {
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .loader {
+      flex-grow: 1;
+      animation: spinner 1s infinite linear;
+  
+  }
+
+  @keyframes spinner {
+    0% {
+        transform: rotate(0deg) scale(0.5);
+    }
+    100% {
+        transform: rotate(360deg) scale(0.5);
+    }
   }
