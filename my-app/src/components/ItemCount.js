@@ -7,12 +7,15 @@ export const ItemCount = ({ initialState = 0, precio }) => {
   
 
   const handleSumar = () => {
-
+    
     setCounter((c) => c + 1);
     
   };
 
   const handleRestar = () => {
+    if ( counter === 0 ){
+      return
+    }
     
     setCounter((c) => c - 1);
     };
