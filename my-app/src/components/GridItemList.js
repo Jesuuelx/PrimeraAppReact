@@ -16,7 +16,7 @@ export const GridItemList = ({}) => {
   if (typeof id !== "undefined") {
   }
 
-  const getData = () => {
+  const getData = ( id ) => {
     return new Promise((resolve, reject) => {
       if (typeof id !== "undefined") {
         let itemList = productos.filter(item => item.tipo == id);
@@ -39,7 +39,7 @@ export const GridItemList = ({}) => {
       loading:true,
     });
 
-    getData()
+    getData( id )
       .then((resp) => {
         setState({
           data: resp,
