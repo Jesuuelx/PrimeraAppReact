@@ -13,9 +13,6 @@ export const GridItemList = ({}) => {
 
   const { data, loading } = state;
 
-  if (typeof id !== "undefined") {
-  }
-
   const getData = ( id ) => {
     return new Promise((resolve, reject) => {
       if (typeof id !== "undefined") {

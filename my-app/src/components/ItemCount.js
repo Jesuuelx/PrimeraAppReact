@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../index.css";
 
-export const ItemCount = ({ initialState = 0, precio }) => {
+export const ItemCount = ({ initialState = 0, precio, onAdd }) => {
   const [counter, setCounter] = useState(initialState);
   const [compra,  setCompra] = useState('No hay Arts en el carrito')
   
@@ -24,6 +24,8 @@ export const ItemCount = ({ initialState = 0, precio }) => {
     if ( counter === 0 ){
       return
     }
+
+    onAdd(counter)
     
     setCompra(`Tienes ${counter} articulos en el carrito`);
   };

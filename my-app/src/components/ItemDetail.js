@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { productos } from '../data-productos/data';
 import { ItemCount } from './ItemCount';
 import { Loading } from './Loading';
@@ -15,7 +15,17 @@ export const ItemDetail = ({ }) => {
 
 const { id } = useParams()
 
+const [seleccionar, setSeccionar] = useState(false)
 
+const onAdd = ( seleccionado ) => {
+    if ( seleccionado != undefined) {
+        setSeccionar( seleccionado );
+
+
+    }
+
+
+}
   
  
 const  getItem = () => {
@@ -54,7 +64,8 @@ useEffect(() => {
             <h4> { data.nombre } </h4>
             <p>{ data.description }</p>
             <h4>Precio Unitario { data.price } $</h4>
-            <ItemCount precio={data.price} />
+            <ItemCount precio={data.price} onAdd={onAdd} />
+         { seleccionar  &&  <button className='btn btn-outline-success'>  <Link to='/CarShop'> Ir al Carrito  </Link> </button>   }
         </div> )
 
 
