@@ -16,7 +16,7 @@ export const Footer = () => {
         <li className="nav-item"><Link to="/tipo/1" className="nav-link px-2 text-muted">Apple</Link></li>
         <li className="nav-item"><Link to="/tipo/2" className="nav-link px-2 text-muted">Samsung</Link></li>
         <li className="nav-item"><Link to="/tipo/3" className="nav-link px-2 text-muted">Xiaomi</Link></li>
-        <li className="nav-item"><Link to="/tipo/4" className="nav-link px-2 text-muted">Motorola</Link></li>
+        <li className="nav-item"><Link to="/CarShop" className="nav-link px-2 text-muted">Mis Compras/Car</Link></li>
       </ul>
     </footer>
   </div>

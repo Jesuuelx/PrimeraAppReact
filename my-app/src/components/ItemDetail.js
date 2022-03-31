@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { productos } from '../data-productos/data';
 import { ItemCount } from './ItemCount';
 import { Loading } from './Loading';
+import { UserContext } from './UserContext';
 
 export const ItemDetail = ({ }) => {
 
@@ -12,6 +13,8 @@ export const ItemDetail = ({ }) => {
   })
 
   const { loading, data } = cargando;
+
+  const { addProductToCar } = useContext(UserContext);
 
 const { id } = useParams()
 
@@ -26,7 +29,8 @@ const onAdd = ( seleccionado ) => {
 
 
 }
-  
+
+
  
 const  getItem = () => {
 
@@ -52,7 +56,17 @@ useEffect(() => {
 
 }, [id])
 
+ const handleAdd = () => {
+ if ( !seleccionar ){
+   return
+ }
  
+ 
+  console.log(data)
+  addProductToCar(data, seleccionar);
+  console.log('click')
+}
+   
  
   return (
     <>
@@ -64,12 +78,13 @@ useEffect(() => {
             <h4> { data.nombre } </h4>
             <p>{ data.description }</p>
             <h4>Precio Unitario { data.price } $</h4>
-            <ItemCount precio={data.price} onAdd={onAdd} />
-         { seleccionar  &&  <button className='btn btn-outline-success'>  <Link to='/CarShop'> Ir al Carrito  </Link> </button>   }
+            <ItemCount precio={data.price} onAdd={onAdd}  />
+         { seleccionar  &&  <button className='btn btn-outline-success'>  <Link onClick={handleAdd} to='/CarShop'> Ir al Carrito  </Link> </button>   }
         </div> )
 
 
   }
+  <button className='btn btn-outline-primary' onClick={handleAdd}>  <Link to='/'>  Seguir Comprando </Link></button>
   </>
   )
 }
