@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { productos } from "../data-productos/data";
 import { GridItem } from "./GridItem";
+import { getDocs, collection , query , where } from "firebase/firestore"
+import { db } from "./firebase"
 
 export const GridItemList = ({}) => {
   const [state, setState] = useState({
@@ -13,38 +14,41 @@ export const GridItemList = ({}) => {
 
   const { data, loading } = state;
 
-  const getData = ( id ) => {
-    return new Promise((resolve, reject) => {
-      if (typeof id !== "undefined") {
-        let itemList = productos.filter(item => item.tipo == id);
-        setTimeout(() => {
-          resolve(itemList);
-        }, 3000);
-      } else if (typeof id === "undefined") {
-        setTimeout(() => {
-          resolve(productos);
-        }, 3000);
-      } else {
-        reject("Acceso negado");
-      }
-    });
-  };
+  
 
   useEffect(() => {
-    setState({
-      data: [],
-      loading:true,
-    });
+    if(!id){
 
-    getData( id )
-      .then((resp) => {
-        setState({
-          data: resp,
-          loading: false,
-        });
-      })
-      .catch(console.error);
-  }, [id]);
+      const productosCollection = collection(db, "productos")
+      const documentos = getDocs(productosCollection)
+
+      documentos
+      .then(resp => setState({
+        data:(resp.docs.map(doc=>doc.data())),
+        loading:false,
+      }))
+      .catch(console.warn);
+
+  } else {
+
+      const productosCollection = collection(db, "productos")
+      const miFiltro = query(productosCollection,where("tipo","==",id))
+      const documentos = getDocs(miFiltro)
+
+      documentos
+      .then(respuesta => setState({
+        data:(respuesta.docs.map(doc=>doc.data())),
+        loading:false,
+      }))
+      .catch(console.warn);
+      
+  }
+
+
+
+
+
+  });
 
   return (
     <>

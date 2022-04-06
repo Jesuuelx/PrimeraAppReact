@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { productos } from '../data-productos/data';
+import { db } from "./firebase"
 import { ItemCount } from './ItemCount';
 import { Loading } from './Loading';
 import { UserContext } from './UserContext';
+import { getDoc , collection , doc , where , query , getDocs } from "firebase/firestore"
 
 export const ItemDetail = ({ }) => {
 
@@ -31,28 +32,27 @@ const onAdd = ( seleccionado ) => {
 }
 
 
- 
-const  getItem = () => {
-
-  return new Promise ((resolve, reject ) => {
-      if( productos[id] ){
-        setTimeout(() => {
-          resolve(productos[id])
-        }, 3000);
-      }else
-      reject('Acceso Negado')
-  })
-
-}
 
 useEffect(() => {
-  getItem().then( resp => {
-    setCargando({
-      loading:false,
-      data:resp
 
-    })
-  }).catch(console.error)
+
+  const productosCollection = collection(db, "productos")
+  //const documento = getDoc(doc(pokemonCollection, id))
+  //document.then(respuesta => setItem(respuesta.data()))
+  const miFiltro = query(productosCollection,where("id","==",Number(id)))
+  const documentos = getDocs(miFiltro)
+
+  documentos
+  .then(resp => setCargando({
+    loading:false,
+    data:resp.docs.map(doc=>doc.data())[0],
+
+  }))
+  .catch(console.warn)
+
+
+
+
 
 }, [id])
 
