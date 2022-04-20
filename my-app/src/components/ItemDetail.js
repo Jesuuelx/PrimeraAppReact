@@ -37,17 +37,22 @@ useEffect(() => {
 
 
   const productosCollection = collection(db, "productos")
+  console.log(productosCollection)
+  
   //const documento = getDoc(doc(pokemonCollection, id))
   //document.then(respuesta => setItem(respuesta.data()))
-  const miFiltro = query(productosCollection,where("id","==",Number(id)))
+  const miFiltro = query(productosCollection,where("id","==",parseInt(id)))
   const documentos = getDocs(miFiltro)
 
   documentos
-  .then(resp => setCargando({
+  .then(resp => {
+    console.log(resp.docs.map(doc=>doc.data()))
+   setCargando({
+    
     loading:false,
     data:resp.docs.map(doc=>doc.data())[0],
 
-  }))
+  })})
   .catch(console.warn)
 
 

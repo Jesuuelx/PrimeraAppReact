@@ -14,7 +14,7 @@ export const GridItemList = ({}) => {
 
   const { data, loading } = state;
 
-  
+ 
 
   useEffect(() => {
     if(!id){
@@ -23,23 +23,26 @@ export const GridItemList = ({}) => {
       const documentos = getDocs(productosCollection)
 
       documentos
-      .then(resp => setState({
+      .then(resp => {
+        console.log((resp.docs.map(doc=>doc.data())))
+        setState({
         data:(resp.docs.map(doc=>doc.data())),
         loading:false,
-      }))
+      })})
       .catch(console.warn);
 
   } else {
 
       const productosCollection = collection(db, "productos")
-      const miFiltro = query(productosCollection,where("tipo","==",id))
+      const miFiltro = query(productosCollection,where("tipo","==",parseInt(id)))
       const documentos = getDocs(miFiltro)
 
       documentos
-      .then(respuesta => setState({
+      .then(respuesta => { 
+        setState({
         data:(respuesta.docs.map(doc=>doc.data())),
         loading:false,
-      }))
+      })})
       .catch(console.warn);
       
   }
@@ -48,7 +51,7 @@ export const GridItemList = ({}) => {
 
 
 
-  });
+  }, [id]);
 
   return (
     <>

@@ -35,6 +35,31 @@ export const MyContext = ({ children }) => {
 
     }
 
+    /*  const deleteElementforElement = ( id, precio, nro, cantidad ) => {
+
+      if ( cantidad === 0 ){
+
+      setCarshop(  carshop.filter(p => p.id !== id)  )
+
+
+      }
+
+      if ( cantidad !== 0 ){
+
+        setCarshop( carshop.map( producto => {
+          ( producto.id === id) && 
+      })) 
+
+      setTotal( t => t - precio * nro )
+
+      }
+   
+   
+     
+
+
+    } */
+
   const values = { user,
     setUser,
      addProductToCar,
